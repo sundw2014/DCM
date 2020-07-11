@@ -34,7 +34,7 @@ python main.py --save ./logs/wrn-28-10 --depth 28 --width 10 --dataroot [path to
 
 ```
 # train wrn-28-10 v.s. mobilenet
-cd wrn_mobi
+cd wrn_mobi/
 mkdir logs
 python main.py --save ./logs/wrn-28-10_mobilenet --dataroot [path to the CIFAR dataset]
 ```
