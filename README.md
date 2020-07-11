@@ -7,7 +7,7 @@ Knowledge Distillation (KD) based methods adopt the oneway Knowledge Transfer (K
 
 bibtex:
 ```
-@inproceedings{Yao2019DKS,
+@inproceedings{Yao2020DCM,
   title={Knowledge Transfer via Dense Cross-layer Mutual-distillation},
   author={Yao, Anbang and Sun, Dawei},
   booktitle={Proceedings of European Conference on Computer Vision},
