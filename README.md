@@ -10,7 +10,7 @@ bibtex:
 @inproceedings{Yao2020DCM,
   title={Knowledge Transfer via Dense Cross-layer Mutual-distillation},
   author={Yao, Anbang and Sun, Dawei},
-  booktitle={Proceedings of European Conference on Computer Vision},
+  booktitle={Proceedings of the European Conference on Computer Vision},
   year={2020}
 }
 ```
