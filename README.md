@@ -1,54 +1,19 @@
-Deeply-Supervised Knowledge Synergy
+Knowledge Transfer via Dense Cross-layer Mutual-distillation
 =============
 
-This code was used for experiments with Deeply-Supervised Knowledge Synergy (CVPR'2019) https://arxiv.org/abs/1906.00675 by Dawei Sun, Anbang Yao, Aojun Zhou, and Hao Zhao. This code is based on the official pytorch implementation of WRN (https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch).
+This code was used for experiments in Knowledge Transfer via Dense Cross-layer Mutual-distillation (ECCV'2020) by Anbang Yao and Dawei Sun. This code is based on the official pytorch implementation of WRN (https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch).
 
-Modern Convolutional Neural Networks (CNNs) have more complicated blocks stacked with greatly increased depth compared with the pioneering 8-layer AlexNet. However, current prevailing training scheme follows the previous way of adding supervision to the last layer of the network only and propagating error information up layer-by-layer. In this paper, we propose Deeply-supervised Knowledge Synergy (DKS), a new method aiming to train CNNs with improved generalization ability for image classification tasks without introducing extra computational cost during inference. Inspired by the deeply-supervised learning scheme, we first append auxiliary supervision branches on top of certain intermediate layers during network training. While using auxiliary supervision can improve model accuracy to some degree, we go one step further to explore the possibility of utilizing the knowledge (i.e., the class probability over the training data) generated from the auxiliary classifiers and the classifier connected to the last layer as a new regularization to improve CNN training. A novel synergy loss, which considers pairwise knowledge matching among all supervision branches, is presented. Intriguingly, dense pairwise knowledge matching operations are conducted in both top-down and bottom-up directions at each training iteration, resembling a dynamic synergy process for the same task. We evaluate the proposed method on image classification datasets using state-of-the-art CNN architectures. Extensive experiments show that the models trained with our DKS are consistently better than their corresponding counterparts.
-
-Test error (%, mean +/- std over 5 runs) on CIFAR-100:
-
-Network          |   baseline   |      DKS     |
------------------|:------------:|:-------------:
-WRN-28-10        |18.72 +/- 0.24|17.24 +/- 0.22
-WRN-28-10-dropout|18.64 +/- 0.19|16.71 +/- 0.17
-
-Test error (%, Top-1/Top-5) on ImageNet:
-
-Network   |   baseline  |    DKS     |
-----------|:-----------:|:-----------:
-ResNet-18 | 31.06/11.13 | 28.68/9.55
-ResNet-50 | 25.47/7.58  | 23.53/6.40
-ResNet-152| 22.45/5.94  | 20.98/5.28
-
-See https://arxiv.org/abs/1906.00675 for details.
-
-<img width="787" alt="CIFAR_error_rate" src="images/CIFAR_error_rate.png">
-
-*Figure 1: Error rate of WRNs on CIFAR-100. (left: WRN-28-10, right: WRN-28-10-dropout. We plot the range over 5 runs.)*
-
-<br>
-
-<img width="787" alt="ImageNet_error_rate" src="images/ImageNet_error_rate.png">
-
-*Figure 2: Error rate of ResNets on ImageNet. (a): ResNet-18, (b): ResNet-50, (c): ResNet-152. (For ResNet-152, we use stronger data augmentation.)*
-<br>
+Knowledge Distillation (KD) based methods adopt the oneway Knowledge Transfer (KT) scheme in which training a lower-capacity student network is guided by a pre-trained high-capacity teacher network. Recently, Deep Mutual Learning (DML) presented a two-way KT strategy, showing that the student network can be also helpful to improve the teacher network. In this paper, we propose Dense Crosslayer Mutual-distillation (DCM), an improved two-way KT method in which the teacher and student networks are trained collaboratively from scratch. To augment knowledge representation learning, well-designed auxiliary classifiers are added to certain hidden layers of both teacher and student networks. To boost KT performance, we introduce dense bidirectional KD operations between the layers appended with classifiers. After training, all auxiliary classifiers are discarded, and thus there are no extra parameters introduced to final models. We test our method on a variety of KT tasks, showing its superiorities over related methods.
 
 bibtex:
 ```
-@inproceedings{Sun2019DKS,
-  title={Deeply-Supervised Knowledge Synergy},
-  author={Sun, Dawei and Yao, Anbang and Zhou, Aojun and Zhao, Hao},
-  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
-  year={2019}
+@inproceedings{Yao2019DKS,
+  title={Knowledge Transfer via Dense Cross-layer Mutual-distillation},
+  author={Yao, Anbang and Sun, Dawei},
+  booktitle={Proceedings of European Conference on Computer Vision},
+  year={2020}
 }
 ```
-
-# Pretrained Models
-ResNet-18 (45M): [Download from Google Drive](https://drive.google.com/file/d/1P5QA_uLyaqaSDUCVb0Kkg-UlvVoBJphc/view?usp=sharing)
-
-ResNet-50 (98M): [Download from Google Drive](https://drive.google.com/file/d/1sqhBPdzHi-X0svyBeFWEjiqveWfAohdK/view?usp=sharing)
-
-ResNet-152 (231M): [Download from Google Drive](https://drive.google.com/file/d/1zoCNTuSI0dG2JUjTLFc5vjFodVPPi6C7/view?usp=sharing)
 
 # Usage
 
@@ -73,13 +38,3 @@ cd wrn_mobi
 mkdir logs
 python main.py --save ./logs/wrn-28-10_mobilenet --dataroot [path to the CIFAR dataset]
 ```
-
-### Run testing on ImageNet
-1. Download the pretrained model.
-2. Prepare the validation set following [this](https://github.com/pytorch/examples/tree/master/imagenet#requirements).
-3. Run the following command:
-
- ```
- cd imagenet/
- python main.py -a [resnet18/50/152] --model_path [path to the pretrained model] [ImageNet folder with the val subfolder]
- ```
