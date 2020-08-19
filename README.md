@@ -1,7 +1,7 @@
 Knowledge Transfer via Dense Cross-layer Mutual-distillation
 =============
 
-This code was used for experiments in Knowledge Transfer via Dense Cross-layer Mutual-distillation (ECCV'2020) by Anbang Yao and Dawei Sun. This code is based on the official pytorch implementation of WRN (https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch).
+This repo contains code for the experiments in <a href="https://arxiv.org/pdf/2008.07816.pdf" target="_blank">Knowledge Transfer via Dense Cross-layer Mutual-distillation</a> (ECCV'2020) by Anbang Yao and Dawei Sun. This repo was developed based on the official pytorch implementation of <a href="https://github.com/szagoruyko/wide-residual-networks/tree/master/pytorch" target="_blank"> WRN </a>.
 
 <img width="787" alt="illustration" src="images/illustration.png">
 
